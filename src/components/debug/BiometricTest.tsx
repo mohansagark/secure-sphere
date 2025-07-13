@@ -13,20 +13,18 @@ export const BiometricTest: React.FC = () => {
             <AlertCircle className="w-6 h-6 text-yellow-500" />
             <h1 className="text-2xl font-bold">BiometricTest Component</h1>
           </div>
-          
+
           <div className="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4 mb-6">
             <p className="text-yellow-200">
-              This component is temporarily disabled for maintenance. 
-              The biometric authentication system has been updated to use server-side 
-              credential storage. Please use the main authentication interface or 
-              AuthTestPageSimple for biometric testing.
+              This component is temporarily disabled for maintenance. The
+              biometric authentication system has been updated to use
+              server-side credential storage. Please use the main authentication
+              interface or AuthTestPageSimple for biometric testing.
             </p>
           </div>
 
           <div className="space-y-4">
-            <p className="text-gray-300">
-              Available alternatives:
-            </p>
+            <p className="text-gray-300">Available alternatives:</p>
             <ul className="list-disc list-inside space-y-2 text-gray-400">
               <li>Main Dashboard: Biometric registration and authentication</li>
               <li>AuthTestPageSimple: Simplified biometric testing</li>
@@ -35,8 +33,8 @@ export const BiometricTest: React.FC = () => {
           </div>
 
           <div className="mt-6">
-            <Button 
-              onClick={() => window.location.href = '/auth-test'}
+            <Button
+              onClick={() => (window.location.href = "/auth-test")}
               className="bg-blue-600 hover:bg-blue-700"
             >
               Go to AuthTestPageSimple
