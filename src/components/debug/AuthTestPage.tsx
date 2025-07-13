@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/Button";
 import { Fingerprint, Mail, AlertCircle, CheckCircle } from "lucide-react";
-import { biometricAuth } from "@/utils/biometricAuth";
+import { biometricAuthClient } from "@/utils/biometricAuthClient";
 
 export const AuthTestPage: React.FC = () => {
   const [testResults, setTestResults] = useState<Record<string, any>>({});
@@ -71,9 +71,9 @@ export const AuthTestPage: React.FC = () => {
   };
 
   const handleClearBiometricCredentials = () => {
-    biometricAuth.clearAllCredentials();
+    // biometricAuthClient.clearAllCredentials(); // Not available in server-side implementation
     alert(
-      "Biometric credentials cleared! You can now test the registration flow."
+      "Clearing server-side credentials is not available in this test interface. Please use the main dashboard."
     );
   };
 

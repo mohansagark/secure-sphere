@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Shield, Eye, EyeOff, Fingerprint, Mail } from "lucide-react";
-import { biometricAuth } from "@/utils/biometricAuth";
+import { biometricAuthClient } from "@/utils/biometricAuthClient";
 
 export const AuthenticationPage: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -32,10 +32,14 @@ export const AuthenticationPage: React.FC = () => {
 
   const checkBiometricSupport = async () => {
     try {
-      const info = biometricAuth.getDeviceInfo();
-      setDeviceInfo(info);
+      // Set device info with basic browser information
+      setDeviceInfo({
+        platform: navigator.platform,
+        userAgent: navigator.userAgent,
+        webAuthnSupported: !!window.PublicKeyCredential,
+      });
 
-      const available = await biometricAuth.isBiometricAvailable();
+      const available = await biometricAuthClient.isBiometricAvailable();
       setBiometricAvailable(available);
     } catch (error) {
       console.error("Error checking biometric support:", error);
