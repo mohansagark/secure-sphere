@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biometric Check</title>
+</head>
+<body>
+    <h1>WebAuthn Diagnostic</h1>
+    <div id="results"></div>
+    
+    <script>
+        async function checkBiometric() {
+            const results = document.getElementById('results');
+            
+            // Check WebAuthn support
+            if (!window.PublicKeyCredential) {
+                results.innerHTML += '<p>❌ WebAuthn not supported</p>';
+                return;
+            }
+            results.innerHTML += '<p>✅ WebAuthn supported</p>';
+            
+            // Check platform authenticator
+            try {
+                const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+                if (available) {
+                    results.innerHTML += '<p>✅ Platform authenticator available</p>';
+                } else {
+                    results.innerHTML += '<p>❌ Platform authenticator not available</p>';
+                }
+            } catch (error) {
+                results.innerHTML += '<p>❌ Error checking platform authenticator: ' + error.message + '</p>';
+            }
+            
+            // Check browser info
+            results.innerHTML += '<p>Browser: ' + navigator.userAgent + '</p>';
+            results.innerHTML += '<p>Platform: ' + navigator.platform + '</p>';
+            results.innerHTML += '<p>Protocol: ' + window.location.protocol + '</p>';
+            results.innerHTML += '<p>Hostname: ' + window.location.hostname + '</p>';
+        }
+        
+        checkBiometric();
+    </script>
+</body>
+</html>

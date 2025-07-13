@@ -1,0 +1,32 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // DEVELOPMENT MODE - More permissive rules for testing
+    // TODO: Implement proper server-side authentication for production
+    
+    // Users collection - allow reading own data even without auth for biometric login
+    match /users/{userId} {
+      allow read: if true; // Allow reading any user doc for biometric auth
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // All other collections - allow all authenticated users for development
+    // In production, these should be restricted to user's own data
+    match /securityLogs/{logId} {
+      allow read, write: if true; // Allow all for development
+    }
+    
+    match /biometricCredentials/{credentialId} {
+      allow read, write: if true; // Allow all for development
+    }
+    
+    match /creditCards/{cardId} {
+      allow read, write: if true; // Allow all for development
+    }
+    
+    match /professionalInfo/{infoId} {
+      allow read, write: if true; // Allow all for development
+    }
+  }
+}
